@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  #before_action :search_searches, only: [:show, :edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
@@ -9,6 +10,8 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.all
+    #@s = Book.ransack(params[:q])
+    #@books = @s.result(distinct: true)
   end
 
   def create

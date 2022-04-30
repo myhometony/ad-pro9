@@ -6,7 +6,18 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
+  def self.search(search,word)
+    if search == "perfect_match"
+      @books = Book.where(title: "#{word}")
+    elsif search == "partial_match"
+      @books = Book.where("title LIKE?","%#{word}%")
+    else
+      @books = Book.all
+    end
+  end
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
 end

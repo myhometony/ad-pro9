@@ -34,6 +34,17 @@ class User < ApplicationRecord
   end
 
 
+  def self.search(search,word)
+    if search == "perfect_match"
+      @users = User.where(name: "#{word}")
+    elsif search == "partial_match"
+      @users = User.where("name LIKE?","%#{word}%")
+    else
+      @users = User.all
+    end
+  end
+
+
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'

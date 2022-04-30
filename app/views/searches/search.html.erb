@@ -1,0 +1,23 @@
+
+<% if @range == '2' %>
+  <%= render 'books/index', books: @books %>
+<% else %>
+  <%= render 'users/index', users: @users %>
+<% end %>
+
+
+
+
+
+
+
+<%#= search_form_for @s do |f| %>
+  <%#= f.label :type_id_eq %>
+    <%#= f.radio_button :type_id_eq, 1 %>
+    <%#= f.radio_button :type_id_eq, 2 %>
+  <%#= f.label :book_id_eq, '地域選択' %>
+  <%#= f.collection_select(:book_id_eq, Book.all, :id, :name, {include_blank: "---"}) %>
+  <%#= f.label :title_or_body, 'キーワード検索' %>
+  <%#= f.search_field :title_or_body_cont %>
+  <%# f.submit '検索' %>
+  <%# end %>
