@@ -6,14 +6,15 @@ class BookCommentsController < ApplicationController
     #comment = current_user.book_comments.new(book_params)
     comment.book_id = @book.id
     comment.save
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   def destroy
+    @book = Book.find(params[:book_id])#追加することで削除後非同期通信できた
     BookComment.find(params[:id]).destroy
     #comment = current_user.book_comments.find_by(book_id: book.id)
     #comment.destroy
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   private
