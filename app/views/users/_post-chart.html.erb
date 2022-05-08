@@ -24,3 +24,47 @@
      </tr>
    </tbody>
   </table>
+
+<p>7日分の投稿数の比率</p>
+ <canvas id="myChart" ></canvas>
+  <script>
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+    /* グラフの種類 (bar、line、rader、pie、doughnut、polarArea、bubble などがある) */
+    type: "line",
+    data: {
+      /* 各項目のラベル(上から時計回り) */
+      labels: ["6日前","5日前","4日前", "3日前","2日前", "1日前", "今日" ],
+      /* データの設定 */
+      datasets: [ {
+          /* グラフ全体のラベル */
+          label: "投稿した本の数",
+          /* グラフのデータ(上から時計回り) */
+          data: [<%= @sixday_ago_book.count %>,
+            <%= @fiveday_ago_book.count %>,
+            <%= @fourday_ago_book.count %>,
+            <%= @threeday_ago_book.count %>,
+            <%= @twoday_ago_book.count %>,
+            <%= @yesterday_book.count %>,
+            <%= @today_book.count %> ],
+          /* グラフを塗りつぶすかどうか（falseにすると枠線だけのグラフになる）*/
+          fill: false,
+          /* 背景色 */
+          /*backgroundColor: "rgba(54, 162, 235, 0.2)",*/
+          /* 枠線色 */
+          borderColor: "blue",
+          /* ポイントを塗りつぶす色 */
+          pointBackgroundColor: "blue",
+          /* ポイントの枠線色 */
+          pointBorderColor: "#fff",
+        },],
+    },
+    //オプションの設定
+    options: {
+        title: {
+            display:true,
+            text: "７日分の投稿数の比較"
+        },
+    },
+  });
+</script>
