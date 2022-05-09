@@ -25,11 +25,12 @@
    </tbody>
   </table>
 
-<p>7日分の投稿数の比率</p>
- <canvas id="myChart" ></canvas>
+
+ <canvas id="myLineChart" ></canvas>
   <script>
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
+  $(document).on('turbolinks:load', function() {
+  var ctx = document.getElementById("myLineChart");
+  var myLineChart = new Chart(ctx, {
     /* グラフの種類 (bar、line、rader、pie、doughnut、polarArea、bubble などがある) */
     type: "line",
     data: {
@@ -48,7 +49,7 @@
             <%= @yesterday_book.count %>,
             <%= @today_book.count %> ],
           /* グラフを塗りつぶすかどうか（falseにすると枠線だけのグラフになる）*/
-          fill: false,
+          /*fill: false,なくてよい*/
           /* 背景色 */
           /*backgroundColor: "rgba(54, 162, 235, 0.2)",*/
           /* 枠線色 */
@@ -57,14 +58,27 @@
           pointBackgroundColor: "blue",
           /* ポイントの枠線色 */
           pointBorderColor: "#fff",
-        },],
+          tension: 0.4
+        }
+        ],
     },
-    //オプションの設定
+
     options: {
-        title: {
-            display:true,
-            text: "７日分の投稿数の比較"
-        },
-    },
-  });
+          title: {
+            display: true,
+            text: '7日間の投稿数の比較'
+          },
+          responsive: true,
+          scales: {
+            y:{
+              suggestedMin: 0,
+              suggestedMax: 10
+            },
+            x:{
+              stacked: true
+            },
+          },
+        }
+      });
+    });
 </script>
